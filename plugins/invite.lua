@@ -13,7 +13,7 @@ end
 function run(msg, matches)
   local data = load_data(_config.moderation.data)
   if not is_realm(msg) then
-    if data[tostring(msg.to.id)] and data[tostring(msg.to.id)]['settings']['lock_member'] == 'yes' and not is_admin(msg) then
+    if data[tostring(msg.to.id)]['settings']['lock_member'] == 'yes' and not is_admin(msg) then
 		  return 'Group is private.'
     end
   end
@@ -32,8 +32,16 @@ function run(msg, matches)
   res_user(username,  callbackres, cbres_extra)
 end
 return {
+    description = "Invite A User Into Group",
+    usage = {
+  "/invite (id) : Invite User Into Group",
+  "invite (id): Invite User Into Group",
+  "دعوت (id) : Invite User Into Group",
+  },
     patterns = {
-      "^[!/]invite (.*)$"
+      "^دعوت (.*)$",
+	  "^[!/#]invite (.*)$",
+	  "^[Ii]nvite (.*)$"
     },
     run = run
 }
